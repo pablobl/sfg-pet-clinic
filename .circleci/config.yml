@@ -43,5 +43,5 @@ jobs:
       - run: mvn integration-test
 
       - store_artifacts:
-          path: /repo
+          path: ~/repo
 
