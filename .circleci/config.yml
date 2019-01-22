@@ -43,6 +43,5 @@ jobs:
       - run: mvn integration-test
 
       - store_artifacts:
-          path: /code/test-results
-          destination: prefix
+          path: /repo
 
