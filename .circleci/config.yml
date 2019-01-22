@@ -42,3 +42,7 @@ jobs:
       # run tests!
       - run: mvn integration-test
 
+      - store_artifacts:
+          path: /code/test-results
+          destination: prefix
+
