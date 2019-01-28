@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.services.springdatajps;
+package guru.springframework.sfgpetclinic.services.springdatajpa;
 
 import guru.springframework.sfgpetclinic.model.Vet;
 import guru.springframework.sfgpetclinic.repositories.VetRepository;
@@ -9,40 +9,43 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 8/5/18.
+ */
 @Service
 @Profile("springdatajpa")
 public class VetSDJpaService implements VetService {
 
-    private final VetRepository vetRepositoryve;
+    private final VetRepository vetRepository;
 
-    public VetSDJpaService(VetRepository vetRepositoryve) {
-        this.vetRepositoryve = vetRepositoryve;
+    public VetSDJpaService(VetRepository vetRepository) {
+        this.vetRepository = vetRepository;
     }
 
     @Override
     public Set<Vet> findAll() {
         Set<Vet> vets = new HashSet<>();
-        vetRepositoryve.findAll().forEach(vets::add);
+        vetRepository.findAll().forEach(vets::add);
         return vets;
     }
 
     @Override
     public Vet findById(Long aLong) {
-        return vetRepositoryve.findById(aLong).orElse(null);
+        return vetRepository.findById(aLong).orElse(null);
     }
 
     @Override
     public Vet save(Vet object) {
-        return vetRepositoryve.save(object);
+        return vetRepository.save(object);
     }
 
     @Override
     public void delete(Vet object) {
-        vetRepositoryve.delete(object);
+        vetRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-        vetRepositoryve.deleteById(aLong);
+        vetRepository.deleteById(aLong);
     }
 }

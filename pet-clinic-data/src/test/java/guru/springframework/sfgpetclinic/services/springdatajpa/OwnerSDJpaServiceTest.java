@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.services.springdatajps;
+package guru.springframework.sfgpetclinic.services.springdatajpa;
 
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.repositories.OwnerRepository;
@@ -24,7 +24,6 @@ import static org.mockito.Mockito.*;
 class OwnerSDJpaServiceTest {
 
     public static final String LAST_NAME = "Smith";
-
     @Mock
     OwnerRepository ownerRepository;
 
@@ -41,18 +40,11 @@ class OwnerSDJpaServiceTest {
 
     @BeforeEach
     void setUp() {
-        returnOwner = new Owner();
-        returnOwner.setId(1L);
-        returnOwner.setLastName(LAST_NAME);
+        returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
     }
 
     @Test
     void findByLastName() {
-
-        Owner returnOwner = new Owner();
-        returnOwner.setId(1L);
-        returnOwner.setLastName(LAST_NAME);
-
         when(ownerRepository.findByLastName(any())).thenReturn(returnOwner);
 
         Owner smith = service.findByLastName(LAST_NAME);
@@ -64,15 +56,11 @@ class OwnerSDJpaServiceTest {
 
     @Test
     void findAll() {
-        Set<Owner> returnOwnerSet = new HashSet<>();
-        Owner owner1 = new Owner();
-        owner1.setId(1L);
-        Owner owner2 = new Owner();
-        owner2.setId(2L);
-        returnOwnerSet.add(owner1);
-        returnOwnerSet.add(owner2);
+        Set<Owner> returnOwnersSet = new HashSet<>();
+        returnOwnersSet.add(Owner.builder().id(1l).build());
+        returnOwnersSet.add(Owner.builder().id(2l).build());
 
-        when(ownerRepository.findAll()).thenReturn(returnOwnerSet);
+        when(ownerRepository.findAll()).thenReturn(returnOwnersSet);
 
         Set<Owner> owners = service.findAll();
 
@@ -98,10 +86,10 @@ class OwnerSDJpaServiceTest {
         assertNull(owner);
     }
 
+
     @Test
     void save() {
-        Owner ownerToSave = new Owner();
-        ownerToSave.setId(1L);
+        Owner ownerToSave = Owner.builder().id(1L).build();
 
         when(ownerRepository.save(any())).thenReturn(returnOwner);
 
@@ -116,6 +104,7 @@ class OwnerSDJpaServiceTest {
     void delete() {
         service.delete(returnOwner);
 
+        //default is 1 times
         verify(ownerRepository, times(1)).delete(any());
     }
 

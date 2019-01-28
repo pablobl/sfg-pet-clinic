@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.services.springdatajps;
+package guru.springframework.sfgpetclinic.services.springdatajpa;
 
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 8/5/18.
+ */
 @Service
 @Profile("springdatajpa")
 public class PetSDJpaService implements PetService {

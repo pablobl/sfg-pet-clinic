@@ -1,21 +1,24 @@
-package guru.springframework.sfgpetclinic.services.springdatajps;
+package guru.springframework.sfgpetclinic.services.springdatajpa;
 
 import guru.springframework.sfgpetclinic.model.Speciality;
 import guru.springframework.sfgpetclinic.repositories.SpecialtyRepository;
-import guru.springframework.sfgpetclinic.services.SpecialityService;
+import guru.springframework.sfgpetclinic.services.SpecialtyService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 8/5/18.
+ */
 @Service
 @Profile("springdatajpa")
-public class SpecialtySDJpaService implements SpecialityService {
+public class SpecialitySDJpaService implements SpecialtyService {
 
     private final SpecialtyRepository specialtyRepository;
 
-    public SpecialtySDJpaService(SpecialtyRepository specialtyRepository) {
+    public SpecialitySDJpaService(SpecialtyRepository specialtyRepository) {
         this.specialtyRepository = specialtyRepository;
     }
 

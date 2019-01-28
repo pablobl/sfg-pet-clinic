@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+/**
+ * Created by jt on 8/7/18.
+ */
 @Service
 @Profile({"default", "map"})
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
@@ -17,8 +20,19 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
     }
 
     @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
+    public Visit findById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public Visit save(Visit visit) {
+
+        if(visit.getPet() == null || visit.getPet().getOwner() == null || visit.getPet().getId() == null
+            || visit.getPet().getOwner().getId() == null){
+            throw new RuntimeException("Invalid Visit");
+        }
+
+        return super.save(visit);
     }
 
     @Override
@@ -27,17 +41,7 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
     }
 
     @Override
-    public Visit save(Visit object) {
-
-        if(object.getPet() == null || object.getPet().getOwner() == null || object.getPet().getId() == null
-            || object.getPet().getOwner().getId() == null){
-            throw new RuntimeException("Invalid Visit");
-        }
-        return super.save(object);
-    }
-
-    @Override
-    public Visit findById(Long id) {
-        return super.findById(id);
+    public void deleteById(Long id) {
+        super.deleteById(id);
     }
 }
